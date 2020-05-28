@@ -27,14 +27,14 @@ func main() {
 	go func() {
 		for {
 			go func() {
-				resp, err := http.Get(fmt.Sprintf("http://%s:%s", host, port))
+				_, err := http.Get(fmt.Sprintf("http://%s:%s", host, port))
 				if err != nil {
-					fmt.Println("Response FAILED")
+					//fmt.Println("Response FAILED")
 					counter <- true
 					return
 				}
 				counter <- false
-				fmt.Println("Response OK", resp.StatusCode)
+				//fmt.Println("Response OK", resp.StatusCode)
 			}()
 			time.Sleep(time.Duration(interval) * time.Millisecond)
 		}
@@ -68,5 +68,3 @@ func main() {
 		fmt.Println("Attack has failed")
 	}
 }
-
-kubectl run nginx --image nginx:latest
